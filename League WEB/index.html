@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga de FIFA</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+        }
+        h1, h2 {
+            color: #fff;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 2em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            background-color: #1c1c1e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        th {
+            background-color: #2c3e50;
+            color: #fff;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #2c2c2e;
+        }
+        tr:hover {
+            background-color: #3a3a3c;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: #2c3e50;
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background-color: #1c1c1e;
+        }
+        a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Liga de FIFA</h1>
+
+    <!-- Tabla General -->
+    <div class="table-container">
+        <h2>Tabla General</h2>
+        <table id="tablaGeneral">
+            <thead>
+                <tr>
+                    <th>Jugador</th>
+                    <th>JJ</th>
+                    <th>G</th>
+                    <th>E</th>
+                    <th>P</th>
+                    <th>PTS</th>
+                    <th>Porcentual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas de la tabla -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Títulos -->
+    <div class="table-container">
+        <h2>Títulos</h2>
+        <table id="tablaTitulos">
+            <thead>
+                <tr>
+                    <th>Jugador</th>
+                    <th>LIGA</th>
+                    <th>COPA</th>
+                    <th>Total Títulos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas de la tabla -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Historial de Campeones -->
+    <div class="table-container">
+        <h2>Historial de Campeones</h2>
+        <table id="tablaCampeones">
+            <thead>
+                <tr>
+                    <th>Edición</th>
+                    <th>Campeón</th>
+                    <th>Sede</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas de la tabla -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Datos de la tabla general
+        const dataGeneral = [
+            { jugador: "Isaac", jj: 67, g: 27, e: 26, p: 13, pts: 107, porcentual: 1.597 },
+            { jugador: "Darío", jj: 67, g: 29, e: 17, p: 18, pts: 104, porcentual: 1.552 },
+            { jugador: "Rubén", jj: 58, g: 22, e: 14, p: 22, pts: 80, porcentual: 1.379 },
+            { jugador: "Irvin", jj: 59, g: 22, e: 15, p: 22, pts: 81, porcentual: 1.373 },
+            { jugador: "Mercado", jj: 59, g: 18, e: 19, p: 22, pts: 73, porcentual: 1.237 },
+            { jugador: "Pingo", jj: 10, g: 3, e: 3, p: 4, pts: 12, porcentual: 1.200 },
+            { jugador: "Taylor", jj: 25, g: 3, e: 6, p: 16, pts: 15, porcentual: 0.600 }
+        ];
+
+        // Datos de la tabla de títulos
+        const dataTitulos = [
+            { jugador: "Darío", lig: 5, cup: 8, total: 13 },
+            { jugador: "Isaac", lig: 5, cup: 3, total: 8 },
+            { jugador: "Irvin", lig: 4, cup: 2, total: 6 },
+            { jugador: "Mercado", lig: 1, cup: 1, total: 2 },
+            { jugador: "Pingo", lig: 1, cup: 0, total: 1 },
+            { jugador: "Taylor", lig: 0, cup: 0, total: 0 },
+            { jugador: "Rubén", lig: 0, cup: 0, total: 0 }
+        ];
+
+        // Datos del historial de campeones
+        const dataCampeones = [
+            { edicion: "I", campeon: "Isaac", sede: "Casa Taylor" },
+            { edicion: "II", campeon: "Darío", sede: "El Nido" },
+            { edicion: "III", campeon: "Isaac", sede: "El Nido" },
+            { edicion: "IV", campeon: "Isaac", sede: "Casa Rubis" },
+            { edicion: "V", campeon: "Darío", sede: "Casa Rubis" },
+            { edicion: "VI", campeon: "Mercado", sede: "El Nido" },
+            { edicion: "VII", campeon: "Darío", sede: "El Nido" },
+            { edicion: "VIII", campeon: "Irvin", sede: "El Nido" },
+            { edicion: "IX", campeon: "Darío", sede: "El Nido" },
+            { edicion: "X", campeon: "Pingo", sede: "Depa Pingo" },
+            { edicion: "XI", campeon: "Darío", sede: "Depa Pingo" },
+            { edicion: "XII", campeon: "Irvin", sede: "Casa Taylor" },
+            { edicion: "XIII", campeon: "Isaac", sede: "El Nido" },
+            { edicion: "XIV", campeon: "Isaac", sede: "El Nido" },
+            { edicion: "XV", campeon: "Irvin", sede: "Depa Rubén" },
+            { edicion: "XVI", campeon: "Irvin", sede: "El Nido" }
+        ];
+
+        // Función para llenar una tabla con datos
+        function fillTable(tableId, data, columns) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                columns.forEach(column => {
+                    const cell = document.createElement('td');
+                    if (column === 'jugador' || column === 'campeon') {
+                        const link = document.createElement('a');
+                        link.href = `informacion_${item[column].toLowerCase()}.html`; // Enlace a la página personal
+                        link.textContent = item[column];
+                        cell.appendChild(link);
+                    } else {
+                        cell.textContent = item[column];
+                    }
+                    row.appendChild(cell);
+                });
+                tbody.appendChild(row);
+            });
+        }
+
+        // Llenar las tablas con los datos
+        fillTable('tablaGeneral', dataGeneral, ['jugador', 'jj', 'g', 'e', 'p', 'pts', 'porcentual']);
+        fillTable('tablaTitulos', dataTitulos, ['jugador', 'lig', 'cup', 'total']);
+        fillTable('tablaCampeones', dataCampeones, ['edicion', 'campeon', 'sede']);
+    </script>
+
+</body>
+</html>
